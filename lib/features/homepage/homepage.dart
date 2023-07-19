@@ -99,11 +99,72 @@ class _HomepageState extends State<Homepage>
                   ],
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 200,
                   child: TabBarView(
                     controller: tabController,
                     children: [
-                      Text("Stories"),
+                      ListView(
+                        padding: EdgeInsets.all(16),
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                              color: Colors.grey.shade300,
+                            ),
+                            height: 100,
+                            width: 120,
+                            clipBehavior: Clip.hardEdge,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Image.network(
+                                    "https://images.pexels.com/photos/15236595/pexels-photo-15236595/free-photo-of-baku.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Expanded(
+                                  child:
+                                      Stack(clipBehavior: Clip.none, children: [
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Text(
+                                        "Create\nStory",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      top: -24,
+                                      left: 40,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: CircleAvatar(
+                                            child: Icon(
+                                              FontAwesomeIcons.plus,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ]),
+                                ),
+                              ],
+                            ),
+                          ),
+                          StoryItemWidget(),
+                        ],
+                      ),
                       Text("Reels"),
                     ],
                   ),
@@ -111,6 +172,63 @@ class _HomepageState extends State<Homepage>
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class StoryItemWidget extends StatelessWidget {
+  const StoryItemWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.grey,
+        ),
+        color: Colors.grey.shade300,
+      ),
+      height: 100,
+      width: 120,
+      clipBehavior: Clip.hardEdge,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.network(
+            "https://images.pexels.com/photos/15236595/pexels-photo-15236595/free-photo-of-baku.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+            fit: BoxFit.cover,
+          ),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: Container(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+              ),
+              clipBehavior: Clip.hardEdge,
+              child: Image.network(
+                "https://images.pexels.com/photos/15236595/pexels-photo-15236595/free-photo-of-baku.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+              bottom: 10,
+              left: 8,
+              child: Text(
+                "BBC News",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              )),
         ],
       ),
     );
